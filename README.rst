@@ -14,10 +14,9 @@ Server
   ``openvpn ALL=(ALL)  NOPASSWD: /sbin/ip``
 - You must enable package forwarding for IPv6. Either put ``sysctl -w
   net.ipv6.conf.all.forwarding=1`` into you ``/etc/rc.local`` or appand
-  ``net.ipv6.conf.all.forwarding = 1`` to ``/etc/sysctl.conf``.
-  **Warning:** If you automatically receive your IPv6 routes, you *must* set
-  your v6 routes manually (``ip -6 route add ::/0 via <IPv6-Gateway> dev
-  eth0>``!
+  ``net.ipv6.conf.all.forwarding = 1`` to ``/etc/sysctl.conf``.  **Warning:**
+  If you automatically receive your IPv6 routes, you *must* set your v6 routes
+  manually (``ip -6 route add ::/0 via <IPv6-Gateway> dev eth0``!
 - You may need to activate *Neighbor Discovery Proxy*: Add
   ``net.ipv6.conf.all.proxy_ndp = 1`` to your ``/etc/sysctl.conf``
 - Copy the files ``client-connect-ipv6-broker.sh``,
