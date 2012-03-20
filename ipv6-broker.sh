@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Your /64 Network prefix
-export BASERANGE="1234:5678:90ab:cd"
+export BASERANGE="1234:5678:90ab:cdef"
 # The IPv4 address of your vpn server
 export VPN_HOST="10.11.12.1"
 
@@ -34,8 +34,8 @@ fi
 
 if [ $CLIENT -eq 1 ] ; then
     export SITID="sit1"
-    export V6NET="${BASERANGE}::$(echo ${ifconfig_local} | awk -F. '{print $2""$3":"$4}')"
+    export V6NET="${BASERANGE}::$(echo ${ifconfig_local} | awk -F. '{printf "%02x%02x:%02x", $2, $3, $4}')"
 else
     export SITID="sit$(echo ${ifconfig_pool_remote_ip} | awk -F. '{print $2"-"$3"-"$4}')"
-    export V6NET="${BASERANGE}::$(echo ${ifconfig_pool_remote_ip} | awk -F. '{print $2""$3":"$4}')"
+    export V6NET="${BASERANGE}::$(echo ${ifconfig_pool_remote_ip} | awk -F. '{printf "%02x%02x:%02x", $2, $3, $4}')"
 fi
