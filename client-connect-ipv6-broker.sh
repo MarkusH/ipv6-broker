@@ -3,17 +3,17 @@
 # OpenVPN IPv6 Tunnel Broker
 # Copyright (c) 2012 Markus Holtermann
 # Copyright (c) 2011 Lyndsay Roger - https://www.zagbot.com/
-# 
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -40,6 +40,9 @@ sudo /sbin/ip -6 addr add ${V6NET}01/124 dev ${SITID}
 test $DEBUG -eq 1 && echo "/sbin/ip -6 route add ${V6NET}00/124 via ${V6NET}02 dev ${SITID} metric 1" | /usr/bin/logger -t $LOG_TAG
 sudo /sbin/ip -6 route add ${V6NET}00/124 via ${V6NET}02 dev ${SITID} metric 1
 
+# add neighbor discovering proxy for host
+test $DEBUG -eq 1 && echo "/sbin/ip -6 neigh add proxy ${IPV6_EXIT_IP} dev eth0" | /usr/bin/logger -t $LOG_TAG
+sudo /sbin/ip -6 neigh add proxy ${IPV6_EXIT_IP} dev eth0
 # add neighbor discovering proxy for this interface
 test $DEBUG -eq 1 && echo "/sbin/ip -6 neigh add proxy ${V6NET}02 dev eth0" | /usr/bin/logger -t $LOG_TAG
 sudo /sbin/ip -6 neigh add proxy ${V6NET}02 dev eth0
